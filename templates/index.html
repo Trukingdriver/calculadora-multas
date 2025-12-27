@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Multas</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 40px auto; }
+        input, button { padding: 8px; margin: 5px 0; width: 100%; }
+        .resultado { background: #f0f0f0; padding: 15px; margin-top: 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Multas de Velocidad - España</h1>
+    <form method="POST">
+        <label>Límite de velocidad (km/h):</label>
+        <input type="number" name="limite" required>
+        <label>Velocidad medida (km/h):</label>
+        <input type="number" name="velocidad" required>
+        <button type="submit">Calcular Multa</button>
+    </form>
+
+    {% if resultado %}
+    <div class="resultado">
+        <p>Exceso de velocidad: {{ resultado.exceso }} km/h</p>
+        <p>Tipo de infracción: {{ resultado.descripcion }}</p>
+        <p>Multa base: {{ resultado.multa }} €</p>
+        <p>Puntos a perder: {{ resultado.puntos }}</p>
+        <p>Multa con pronto pago: {{ resultado.pronto_pago }} €</p>
+    </div>
+    {% endif %}
+</body>
+</html>
