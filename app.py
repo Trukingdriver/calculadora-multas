@@ -49,20 +49,20 @@ def index():
             "descripcion": descripcion,
             "pronto_pago": pronto_pago
         }
-
-        # --- AQUÍ SE GUARDA EL REGISTRO ---
+        
         try:
             ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             con_datos = f"[{ahora}] Limite: {limite} | Medido: {velocidad} | Multa: {multa}€\n"
             with open("uso.txt", "a", encoding="utf-8") as f:
                 f.write(con_datos)
         except Exception as e:
-            print(f"Error al escribir en el registro: {e}")
-        # ----------------------------------
+            print(f"Error al escribir en el registro: {e}"
 
+                  
     return render_template("index.html", resultado=resultado)
 
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
+
     app.run(host='0.0.0.0', port=port)
