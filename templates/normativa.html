@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="card shadow">
-    <div class="card-body">
-        <h1>Normativa y Márgenes de Error</h1>
-        <p>En España, la Ley de Seguridad Vial establece márgenes de error para los radares:</p>
-        <ul>
-            <li><strong>Radares fijos:</strong> 5 km/h (hasta 100 km/h) o 5% (más de 100 km/h).</li>
-            <li><strong>Radares móviles:</strong> 7 km/h o 7%.</li>
-        </ul>
-        <div class="alert alert-info">
-            Recuerda: El pronto pago reduce la multa en un 50% si se abona en los primeros 20 días.
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow border-0">
+            <div class="card-body p-4">
+                <h2 class="fw-bold mb-4">Normativa y Márgenes Legales</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Márgenes de Error (Orden ICT/155/2020)</h5>
+                        <p>Los radares no son exactos. La ley obliga a aplicar un margen a favor del conductor:</p>
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item bg-transparent">✅ <strong>Radares Fijos:</strong> 5 km/h (en vías < 100) o 5% (en vías > 100).</li>
+                            <li class="list-group-item bg-transparent">✅ <strong>Radares Móviles:</strong> 7 km/h (en vías < 100) o 7% (en vías > 100).</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-warning">
+                            <strong>Importante:</strong> Nuestra calculadora ya aplica estos márgenes automáticamente para darte la velocidad real jurídica.
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h5>¿Cómo funcionan los puntos?</h5>
+                <p>La pérdida de puntos se calcula sobre la velocidad corregida. Las infracciones muy graves pueden conllevar la retirada del carnet y penas de prisión.</p>
+            </div>
         </div>
     </div>
 </div>
