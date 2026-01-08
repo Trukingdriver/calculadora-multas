@@ -2,28 +2,66 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Calculadora de Velocidad</h2>
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-4">
+                <h3 class="text-center mb-4 fw-bold">Calculadora de Sanciones</h3>
                 <form method="POST">
-                    <div class="mb-3">
-                        <label class="form-label">Límite de la vía (km/h):</label>
-                        <input type="number" name="limite" class="form-control" required>
+                    <div class="row g-3 mb-3">
+                        <div class="col-6">
+                            <label class="form-label fw-semibold">Límite Vía</label>
+                            <input type="number" name="limite" class="form-control form-control-lg text-center" placeholder="120" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label fw-semibold">Vel. Medida</label>
+                            <input type="number" name="velocidad" class="form-control form-control-lg text-center" placeholder="138" required>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Velocidad detectada (km/h):</label>
-                        <input type="number" name="velocidad" class="form-control" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label d-block fw-semibold text-center">Tipo de Dispositivo:</label>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="tipo_radar" id="fijo" value="fijo" checked>
+                            <label class="btn btn-outline-primary py-2" for="fijo">📡 Radar Fijo</label>
+                            
+                            <input type="radio" class="btn-check" name="tipo_radar" id="movil" value="movil">
+                            <label class="btn btn-outline-primary py-2" for="movil">🚗 Radar Móvil</label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Calcular Sanción</button>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow-sm">CALCULAR AHORA</button>
                 </form>
 
                 {% if resultado %}
-                <div class="alert mt-4 {% if resultado.multa > 0 %}alert-danger{% else %}alert-success{% endif %}">
-                    <h4>Resultado: {{ resultado.multa }}€</h4>
-                    <p><strong>Puntos:</strong> {{ resultado.puntos }}</p>
-                    <hr>
-                    <p><small><strong>Base Legal:</strong> Según el Art. 52 del Reglamento General de Circulación, circular a {{ resultado.velocidad }} km/h en zona de {{ resultado.limite }} se considera {{ resultado.descripcion }}.</small></p>
+                <div class="mt-4 p-4 rounded-4 border-start border-4 {% if resultado.multa > 0 %}border-danger bg-white shadow-sm{% else %}border-success bg-light{% endif %}">
+                    <div class="text-center mb-3">
+                        <h2 class="display-6 fw-bold {% if resultado.multa > 0 %}text-danger{% else %}text-success{% endif %}">
+                            {{ resultado.multa }}€
+                        </h2>
+                        <span class="badge rounded-pill {% if resultado.puntos == 0 %}bg-success{% elif resultado.puntos < 6 %}bg-warning text-dark{% else %}bg-danger{% endif %} px-3 py-2">
+                            Pérdida de puntos: {{ resultado.puntos }}
+                        </span>
+                    </div>
+                    
+                    <div class="row text-center border-top pt-3">
+                        <div class="col-6 border-end">
+                            <small class="text-muted d-block">Velocidad Real</small>
+                            <span class="fw-bold">{{ resultado.vel_real }} km/h</span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">Pago Reducido</small>
+                            <span class="fw-bold text-primary">{{ resultado.pronto_pago }}€</span>
+                        </div>
+                    </div>
+
+                    {% if resultado.multa > 0 %}
+                    <div class="mt-4 p-3 bg-light rounded-3">
+                        <h6 class="fw-bold"><i class="bi bi-file-earmark-text"></i> Sugerencia de Recurso:</h6>
+                        <p class="small text-muted mb-0 italic">
+                            "Solicito la anulación por margen de error: la velocidad captada de {{ resultado.velocidad }} km/h equivale legalmente a {{ resultado.vel_real }} km/h tras aplicar el margen del 5%/7%..."
+                        </p>
+                    </div>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>
