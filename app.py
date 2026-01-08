@@ -49,20 +49,24 @@ def index():
             "descripcion": descripcion,
             "pronto_pago": pronto_pago
         }
-        
+
+        # Registro de uso
         try:
             ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             con_datos = f"[{ahora}] Limite: {limite} | Medido: {velocidad} | Multa: {multa}€\n"
             with open("uso.txt", "a", encoding="utf-8") as f:
                 f.write(con_datos)
-        except Exception as e:
-            print(f"Error al escribir en el registro: {e}"
+        except:
+            pass
 
-                  
     return render_template("index.html", resultado=resultado)
+
+# NUEVA RUTA PARA LA PÁGINA DE LEYES
+@app.route("/normativa")
+def normativa():
+    return render_template("normativa.html")
 
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
-
     app.run(host='0.0.0.0', port=port)
